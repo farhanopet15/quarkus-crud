@@ -8,6 +8,8 @@ import com.farhan.crud.repository.UserRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import com.farhan.crud.dto.PageResponse;
+import com.farhan.crud.dto.UserFilterRequest;
 
 import java.util.List;
 
@@ -17,16 +19,34 @@ public class UserService {
     @Inject
     UserRepository repository;
 
-    public List<User> getAll(){
+    public PageResponse<User> getAll(UserFilterRequest request){
 
-        return repository.listAll();
+        var query = repository.search(request);
+
+        long total = query.count();
+
+        query.page(request.page, request.size);
+
+        return new PageResponse<>(
+
+                query.list(),
+
+                request.page,
+
+                request.size,
+
+                total,
+
+                query.pageCount()
+
+        );
 
     }
 
-    public User getById(Long id){
+    public User getById(Long id) {
 
-        return repository.findByIdOptional(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+    return repository.findByIdOptional(id)
+            .orElseThrow(() -> new NotFoundException("User not found"));
 
     }
 

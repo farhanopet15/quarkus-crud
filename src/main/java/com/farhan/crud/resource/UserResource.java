@@ -11,6 +11,10 @@ import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import com.farhan.crud.dto.PageResponse;
+import jakarta.ws.rs.BeanParam;
+import com.farhan.crud.dto.UserFilterRequest;
+import com.farhan.crud.dto.PageResponse;
 
 import java.util.List;
 
@@ -22,22 +26,43 @@ public class UserResource {
     @Inject
     UserService service;
 
-    @GET
-    public ApiResponse<List<UserResponse>> getAll(){
+        @GET
+        public ApiResponse<PageResponse<UserResponse>> getAll(
+                @BeanParam UserFilterRequest request
+        ){
 
-        List<UserResponse> users = service.getAll()
-                .stream()
-                .map(UserMapper::toResponse)
-                .toList();
+        PageResponse<User> page =
+                service.getAll(request);
+
+        List<UserResponse> users =
+                page.content
+                        .stream()
+                        .map(UserMapper::toResponse)
+                        .toList();
 
         return new ApiResponse<>(
+
                 true,
+
                 "Success",
-                users
+
+                new PageResponse<>(
+
+                        users,
+
+                        page.page,
+
+                        page.size,
+
+                        page.totalData,
+
+                        page.totalPage
+
+                )
+
         );
 
-    }
-
+        }
     @GET
     @Path("/{id}")
     public ApiResponse<UserResponse> getById(@PathParam("id") Long id){
