@@ -15,18 +15,23 @@ import com.farhan.crud.dto.PageResponse;
 import jakarta.ws.rs.BeanParam;
 import com.farhan.crud.dto.UserFilterRequest;
 import com.farhan.crud.dto.PageResponse;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name = "User API", description = "User Management Endpoint")
+
 public class UserResource {
 
     @Inject
     UserService service;
 
         @GET
+        @Operation(summary = "Get all users")
         public ApiResponse<PageResponse<UserResponse>> getAll(
                 @BeanParam UserFilterRequest request
         ) {
@@ -54,8 +59,9 @@ public class UserResource {
 
         }
 
-    @GET
-    @Path("/{id}")
+        @GET
+        @Path("/{id}")
+        @Operation(summary = "Get user by id")
     public ApiResponse<UserResponse> getById(@PathParam("id") Long id){
 
         return new ApiResponse<>(
@@ -66,7 +72,8 @@ public class UserResource {
 
     }
 
-    @POST
+        @POST
+        @Operation(summary = "Create new user")
     public ApiResponse<UserResponse> create(@Valid CreateUserRequest request){
 
         User user = service.create(request);
@@ -79,8 +86,9 @@ public class UserResource {
 
     }
 
-    @PUT
-    @Path("/{id}")
+        @PUT
+        @Path("/{id}")
+        @Operation(summary = "Update user")
     public ApiResponse<UserResponse> update(
             @PathParam("id") Long id,
             @Valid UpdateUserRequest request){
@@ -95,8 +103,9 @@ public class UserResource {
 
     }
 
-    @DELETE
-    @Path("/{id}")
+        @DELETE
+        @Path("/{id}")
+        @Operation(summary = "Delete user")
     public ApiResponse<String> delete(@PathParam("id") Long id){
 
         service.delete(id);

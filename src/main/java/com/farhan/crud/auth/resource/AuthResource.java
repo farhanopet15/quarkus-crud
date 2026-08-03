@@ -12,10 +12,13 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name = "Authentication", description = "Authentication Endpoint")
 public class AuthResource {
 
     @Inject
@@ -23,6 +26,7 @@ public class AuthResource {
 
     @POST
     @Path("/register")
+    @Operation(summary = "Register new account")
     public ApiResponse<String> register(@Valid RegisterRequest request) {
 
         User user = service.register(request);
@@ -36,6 +40,7 @@ public class AuthResource {
 
     @POST
     @Path("/login")
+    @Operation(summary = "Login user")
     public ApiResponse<String> login(@Valid LoginRequest request) {
 
         User user = service.login(request);
