@@ -1,9 +1,7 @@
 package com.farhan.crud.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -16,5 +14,13 @@ public class User extends PanacheEntity {
     public String email;
 
     @Column(nullable = false)
+    public String password;
+
+    @Column(nullable = false)
     public Integer age;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    public Role role;
+
 }
