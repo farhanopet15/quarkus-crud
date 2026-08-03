@@ -39,9 +39,14 @@ public class UserService {
 
     public User getById(Long id) {
 
-    return repository.findByIdOptional(id)
-            .orElseThrow(() -> new NotFoundException("User not found"));
+        User user = repository.findByIdOptional(id)
+                .orElseThrow(() -> new NotFoundException("User not found"));
 
+        if (user.isDeleted()) {
+            throw new NotFoundException("User not found");
+        }
+
+        return user;
     }
 
     @Transactional
@@ -86,11 +91,11 @@ public class UserService {
 }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
 
         User user = getById(id);
 
-        repository.delete(user);
+        user.softDelete();
 
     }
 

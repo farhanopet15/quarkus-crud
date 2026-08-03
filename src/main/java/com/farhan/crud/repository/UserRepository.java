@@ -35,11 +35,11 @@ public class UserRepository implements PanacheRepository<User> {
         String keyword = request.keyword == null ? "" : request.keyword.trim();
 
         if (keyword.isBlank()) {
-            return findAll(sort);
+            return find("deletedAt IS NULL", sort);
         }
 
         return find(
-                "LOWER(name) LIKE ?1 OR LOWER(email) LIKE ?1",
+                "deletedAt IS NULL AND (LOWER(name) LIKE ?1 OR LOWER(email) LIKE ?1)",
                 sort,
                 "%" + keyword.toLowerCase() + "%"
         );
