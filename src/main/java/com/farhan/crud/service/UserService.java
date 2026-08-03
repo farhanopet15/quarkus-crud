@@ -19,26 +19,20 @@ public class UserService {
     @Inject
     UserRepository repository;
 
-    public PageResponse<User> getAll(UserFilterRequest request){
+    public PageResponse<User> getAll(UserFilterRequest request) {
 
         var query = repository.search(request);
 
-        long total = query.count();
+        long totalData = query.count();
 
         query.page(request.page, request.size);
 
         return new PageResponse<>(
-
                 query.list(),
-
                 request.page,
-
                 request.size,
-
-                total,
-
+                totalData,
                 query.pageCount()
-
         );
 
     }

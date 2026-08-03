@@ -1,12 +1,11 @@
 package com.farhan.crud.repository;
 
+import com.farhan.crud.dto.UserFilterRequest;
 import com.farhan.crud.entity.User;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
-import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
-import com.farhan.crud.dto.UserFilterRequest;
 
 import java.util.Optional;
 
@@ -17,30 +16,13 @@ public class UserRepository implements PanacheRepository<User> {
         return find("email", email).firstResultOptional();
     }
 
-    public PanacheQuery<User> search(String keyword, String sort) {
-
-        Sort sorting = Sort.by(sort == null || sort.isBlank() ? "id" : sort);
-
-        if (keyword == null || keyword.isBlank()) {
-            return findAll(sorting);
-        }
-
-        return find(
-                "LOWER(name) LIKE LOWER(?1) OR LOWER(email) LIKE LOWER(?1)",
-                sorting,
-                "%" + keyword + "%"
-        );
-    }
-
     public PanacheQuery<User> search(UserFilterRequest request) {
 
-        String sortColumn = switch (request.sort) {
-
+        String sortColumn = switch (request.sort.toLowerCase()) {
             case "name" -> "name";
             case "email" -> "email";
             case "age" -> "age";
             default -> "id";
-
         };
 
         Sort.Direction direction =
@@ -48,21 +30,19 @@ public class UserRepository implements PanacheRepository<User> {
                         ? Sort.Direction.Descending
                         : Sort.Direction.Ascending;
 
-        Sort sort =
-                Sort.by(sortColumn, direction);
+        Sort sort = Sort.by(sortColumn, direction);
 
-        if (request.keyword == null || request.keyword.isBlank()) {
+        String keyword = request.keyword == null ? "" : request.keyword.trim();
 
+        if (keyword.isBlank()) {
             return findAll(sort);
-
         }
 
         return find(
-                "LOWER(name) LIKE LOWER(?1) OR LOWER(email) LIKE LOWER(?1)",
+                "LOWER(name) LIKE ?1 OR LOWER(email) LIKE ?1",
                 sort,
-                "%" + request.keyword + "%"
+                "%" + keyword.toLowerCase() + "%"
         );
-
     }
 
 }

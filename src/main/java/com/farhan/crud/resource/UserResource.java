@@ -29,40 +29,31 @@ public class UserResource {
         @GET
         public ApiResponse<PageResponse<UserResponse>> getAll(
                 @BeanParam UserFilterRequest request
-        ){
+        ) {
 
-        PageResponse<User> page =
-                service.getAll(request);
+        PageResponse<User> page = service.getAll(request);
 
-        List<UserResponse> users =
-                page.content
-                        .stream()
-                        .map(UserMapper::toResponse)
-                        .toList();
+        List<UserResponse> users = page.content
+                .stream()
+                .map(UserMapper::toResponse)
+                .toList();
+
+        PageResponse<UserResponse> response = new PageResponse<>(
+                users,
+                page.page,
+                page.size,
+                page.totalData,
+                page.totalPage
+        );
 
         return new ApiResponse<>(
-
                 true,
-
                 "Success",
-
-                new PageResponse<>(
-
-                        users,
-
-                        page.page,
-
-                        page.size,
-
-                        page.totalData,
-
-                        page.totalPage
-
-                )
-
+                response
         );
 
         }
+
     @GET
     @Path("/{id}")
     public ApiResponse<UserResponse> getById(@PathParam("id") Long id){
