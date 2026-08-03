@@ -1,9 +1,6 @@
-version: "3.9"
-
 services:
   postgres:
     image: postgres:16
-
     container_name: quarkus-postgres
 
     restart: always
@@ -21,7 +18,6 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-
     container_name: quarkus-pgadmin
 
     restart: always
@@ -35,6 +31,24 @@ services:
 
     depends_on:
       - postgres
+
+  quarkus-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: quarkus-api
+
+    restart: always
+
+    depends_on:
+      - postgres
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      QUARKUS_PROFILE: docker
 
 volumes:
   postgres_data:
