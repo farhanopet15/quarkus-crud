@@ -19,7 +19,7 @@ jobs:
         env:
           POSTGRES_DB: quarkus
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: opet290999
         ports:
           - 5432:5432
         options: >-
