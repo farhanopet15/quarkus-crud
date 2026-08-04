@@ -233,7 +233,7 @@ This project was built as part of my backend portfolio using modern Java technol
 The frontend for this backend is available in a separate repository:
 
 ```
-quarkus-crud-frontend
+[quarkus-crud-frontend](https://github.com/farhanopet15/quarkus-crud-frontend)
 ```
 
 Built with
