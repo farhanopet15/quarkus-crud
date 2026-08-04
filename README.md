@@ -218,7 +218,7 @@ Ahmad Farhan Walidain
 
 GitHub
 
-[https://github.com/farhanopet15](https://github.com/farhanopet15)
+[farhanopet15](https://github.com/farhanopet15)
 
 LinkedIn
 
@@ -232,9 +232,7 @@ This project was built as part of my backend portfolio using modern Java technol
 
 The frontend for this backend is available in a separate repository:
 
-```
 [quarkus-crud-frontend](https://github.com/farhanopet15/quarkus-crud-frontend)
-```
 
 Built with
 
