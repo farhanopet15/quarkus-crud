@@ -43,7 +43,7 @@ This project demonstrates modern backend development practices including authent
 
 # 📁 Project Structure
 
-```
+```text
 src
 │
 ├── auth
@@ -60,51 +60,26 @@ src
 
 ---
 
-# 🗄 Database
-
-PostgreSQL
-
-Managed using Flyway Migration.
-
-Migration files:
-
-```
-src/main/resources/db/migration
-```
-
----
-
 # 🔐 Authentication
-
-JWT Authentication
-
-Password stored using BCrypt.
-
-Endpoints
 
 ```
 POST /auth/register
-
 POST /auth/login
 ```
 
 ---
 
-# 👥 User API
+# 👤 User API
 
 ```
 GET    /users
-
 GET    /users/{id}
-
 POST   /users
-
 PUT    /users/{id}
-
 DELETE /users/{id}
 ```
 
-Supports
+Supports:
 
 - Pagination
 - Search
@@ -149,18 +124,13 @@ docker compose down
 Clone repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/quarkus-crud-backend.git
-```
-
-Enter project
-
-```bash
-cd quarkus-crud-backend
+git clone https://github.com/farhanopet15/quarkus-crud-backend.git
 ```
 
 Run application
 
 ```bash
+cd quarkus-crud-backend
 ./mvnw quarkus:dev
 ```
 
@@ -174,41 +144,23 @@ mvnw.cmd quarkus:dev
 
 # 🧪 Testing
 
-Run all tests
-
 ```bash
 mvn test
 ```
 
-Includes
+---
 
-- Unit Test (Mockito)
-- Integration Test (QuarkusTest)
+# 📸 Screenshots
+
+Coming Soon
 
 ---
 
-# 🧰 Environment
+# ⭐ Related Project
 
-application.properties
+Frontend Repository
 
-```properties
-quarkus.datasource.db-kind=postgresql
-quarkus.datasource.username=postgres
-quarkus.datasource.password=your_password
-quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/quarkus
-```
-
----
-
-# 🚀 Future Improvements
-
-- Role Based Access Control (RBAC)
-- Refresh Token
-- CI/CD Pipeline
-- Deployment
-- Monitoring
-- Logging
-- API Rate Limiting
+[quarkus-crud-frontend](https://github.com/farhanopet15/quarkus-crud-frontend)
 
 ---
 
@@ -218,27 +170,4 @@ Ahmad Farhan Walidain
 
 GitHub
 
-[farhanopet15](https://github.com/farhanopet15)
-
-LinkedIn
-
-[Ahmad Farhan Walidain](https://www.linkedin.com/in/ahmadfarhanwalidain)
-
----
-
-# ⭐ Portfolio
-
-This project was built as part of my backend portfolio using modern Java technologies.
-
-The frontend for this backend is available in a separate repository:
-
-[quarkus-crud-frontend](https://github.com/farhanopet15/quarkus-crud-frontend)
-
-Built with
-
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- TanStack Query
-- Zustand
+https://github.com/farhanopet15
