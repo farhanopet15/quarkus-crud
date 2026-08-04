@@ -218,11 +218,11 @@ Ahmad Farhan Walidain
 
 GitHub
 
-https://github.com/farhanopet15
+[https://github.com/farhanopet15](https://github.com/farhanopet15)
 
 LinkedIn
 
-(Add your LinkedIn profile)
+[Ahmad Farhan Walidain](https://www.linkedin.com/in/ahmadfarhanwalidain)
 
 ---
 
